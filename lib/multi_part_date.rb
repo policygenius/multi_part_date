@@ -1,5 +1,14 @@
 require 'multi_part_date/version'
 require 'active_support/concern'
+require 'active_support'
+require 'date'
+require 'reform'
+
+require 'reform/form/active_model/validations'
+
+Reform::Form.class_eval do
+  include Reform::Form::ActiveModel::Validations
+end
 
 module MultiPartDate
   extend ActiveSupport::Concern
@@ -36,7 +45,7 @@ module MultiPartDate
           end
         else
           define_method(:"#{key}_#{type}") do
-            send(field_name).try(type) || super()
+            (send(field_name).send(type) if send(field_name)) || super()
           end
         end
       end
