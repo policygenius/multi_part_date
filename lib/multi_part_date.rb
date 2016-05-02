@@ -45,7 +45,11 @@ module MultiPartDate
           end
         else
           define_method(:"#{key}_#{type}") do
-            (send(field_name).send(type) if send(field_name)) || super()
+            if send(field_name)
+              send(field_name).send(type) if send(field_name).respond_to?(type)
+            else
+              super()
+            end
           end
         end
       end
