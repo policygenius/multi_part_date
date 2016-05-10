@@ -1,4 +1,7 @@
 require 'spec_helper'
+require 'pry'
+
+Reform::Form.reform_2_0!
 
 describe MultiPartDate do
   let(:model) do

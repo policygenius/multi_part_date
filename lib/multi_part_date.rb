@@ -3,12 +3,9 @@ require 'active_support/concern'
 require 'active_support'
 require 'date'
 require 'reform'
+require 'representable/coercion'
 
-require 'reform/form/active_model/validations'
-
-Reform::Form.class_eval do
-  include Reform::Form::ActiveModel::Validations
-end
+Reform::Form.reform_2_0!
 
 module MultiPartDate
   extend ActiveSupport::Concern
