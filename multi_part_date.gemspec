@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Petr Gazarov"]
   spec.email         = ["petrgazarov@gmail.com"]
 
-  spec.summary       = %q{Multiple date part fields implementation on the form object level}
+  spec.summary       = %q{Splitting date field into multiple inputs on the form object level (reform)}
   spec.homepage      = "https://github.com/policygenius/multi_part_date"
   spec.license       = "MIT"
 

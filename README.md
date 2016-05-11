@@ -1,5 +1,6 @@
 # MultiPartDate
 [![Build Status](https://semaphoreci.com/api/v1/policygenius/multi_part_date/branches/master/badge.svg)](https://semaphoreci.com/policygenius/multi_part_date)
+[![Gem Version](https://badge.fury.io/rb/multi_part_date.svg)](https://badge.fury.io/rb/multi_part_date)
 
 Easy implementation of multiple date part fields on the form object level.
 
