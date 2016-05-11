@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Petr Gazarov"]
   spec.email         = ["petrgazarov@gmail.com"]
 
-  spec.summary       = %q{This gem implements multiple fields for your single date attribute on the model}
-  spec.description   = %q{Works with apotonick/reform form objects}
+  spec.summary       = %q{This gem implements multiple date part fields for your single date attribute on the model}
+  spec.description   = %q{Designed to work with apotonick/reform form objects}
   spec.homepage      = "https://github.com/policygenius/multi_part_date"
   spec.license       = "MIT"
 

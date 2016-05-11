@@ -1,22 +1,17 @@
+# MultiPartDate
 [![Build Status](https://semaphoreci.com/api/v1/policygenius/multi_part_date/branches/master/badge.svg)](https://semaphoreci.com/policygenius/multi_part_date)
 
-# MultiPartDate
+Easy implementation of multiple date part fields on the form object level.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/multi_part_date`. To experiment with that code, run `bin/console` for an interactive prompt.
+Conceptually it works very similar to Rails date_select helper, e.g. breaks up date month, day and year into separate inputs on the front-end, while parsing to one model attribute on the back-end.
 
-TODO: Delete this and the text above, and describe your gem
+The difference is 1) It allows you to style date part inputs however you want and 2) This is an extension to [reform gem](https://github.com/apotonick/reform) and works on form object level.
 
 ## Installation
-
-Add this line to your application's Gemfile:
 
 ```ruby
 gem 'multi_part_date'
 ```
-
-And then execute:
-
-    $ bundle
 
 Or install it yourself as:
 
@@ -24,20 +19,76 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Form object:
 
-## Development
+```ruby
+class BasicForm < Reform::Form
+  multi_part_date :date_of_birth
+end
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Where `date_of_birth` is an actual model attribute.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### Available options
+
+##### Generate inputs with a different name base:
+
+```
+as: :birth
+```
+
+Will generate inputs
+
+```
+f.birth_day
+f.birth_month
+f.birth_year
+```
+
+
+
+##### To omit parts, set the appropriate option below to `true`:
+
+```
+:discard_day
+:discard_month
+:discard_year
+```
+
+##### Validate conditionally:
+
+```
+validate_if: :some_method
+```
+
+The above method needs to be defined in the form object.
+Note that date is validated by default.
+This gem uses `Date.valid_date?` to determine if the date is valid.
+
+##### These options are delegated to reform's `property` method:
+
+```
+:on
+:type
+```
+
+### View example
+(using simple_form here & written in slim)
+
+```slim
+simple_form_for @basic_form do |f|
+
+  = f.input :birth_month
+
+  = f.input :birth_day
+
+  = f.input :birth_year
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/multi_part_date.
-
+Bug reports and pull requests are welcome! :smile: Fork the repo and submit your PR or issue.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
