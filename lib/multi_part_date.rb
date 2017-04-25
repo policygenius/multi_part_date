@@ -5,8 +5,6 @@ require 'date'
 require 'reform'
 require 'representable/coercion'
 
-Reform::Form.reform_2_0!
-
 module MultiPartDate
   extend ActiveSupport::Concern
 
