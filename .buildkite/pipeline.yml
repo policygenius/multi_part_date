@@ -1,0 +1,9 @@
+---
+steps:
+  - name: ":docker: Build"
+    agents:
+      queue: runner
+    command: bin/test
+    plugins:
+      docker-compose#v1.3.2:
+        run: ruby

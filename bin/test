@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euxf -o pipefail
+
+bundle install
+bundle exec rake spec
