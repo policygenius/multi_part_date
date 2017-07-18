@@ -2,10 +2,10 @@ require 'multi_part_date/version'
 require 'active_support/concern'
 require 'active_support'
 require 'date'
-require 'reform'
+require 'reform_one_two_six'
 require 'representable/coercion'
 
-Reform::Form.reform_2_0!
+ReformOneTwoSix::Form.reform_2_0!
 
 module MultiPartDate
   extend ActiveSupport::Concern

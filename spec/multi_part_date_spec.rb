@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'pry'
 
-Reform::Form.reform_2_0!
+ReformOneTwoSix::Form.reform_2_0!
 
 describe MultiPartDate do
   let(:model) do
@@ -397,25 +397,25 @@ describe MultiPartDate do
   end
 end
 
-class DummyForm < Reform::Form
+class DummyForm < ReformOneTwoSix::Form
   include MultiPartDate
 
   multi_part_date :date_of_birth
 end
 
-class DummyFormWithAsOption < Reform::Form
+class DummyFormWithAsOption < ReformOneTwoSix::Form
   include MultiPartDate
 
   multi_part_date :date_of_birth, as: :birth
 end
 
-class DummyFormWithDiscardOption < Reform::Form
+class DummyFormWithDiscardOption < ReformOneTwoSix::Form
   include MultiPartDate
 
   multi_part_date :date_of_birth, discard_day: true
 end
 
-class DummyFormWithOnOption < Reform::Form
+class DummyFormWithOnOption < ReformOneTwoSix::Form
   include MultiPartDate
   include Composition
 
@@ -429,7 +429,7 @@ class DummyFormWithOnOption < Reform::Form
   multi_part_date :date_of_birth, on: :nested_model
 end
 
-class DummyFormWithValidateIfOption < Reform::Form
+class DummyFormWithValidateIfOption < ReformOneTwoSix::Form
   include MultiPartDate
 
   multi_part_date :date_of_birth, validate_if: :some_truthy_method

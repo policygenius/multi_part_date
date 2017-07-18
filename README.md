@@ -23,7 +23,7 @@ Or install it yourself as:
 Form object:
 
 ```ruby
-class BasicForm < Reform::Form
+class BasicForm < ReformOneTwoSix::Form
   multi_part_date :date_of_birth
 end
 ```
