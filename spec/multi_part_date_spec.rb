@@ -1,7 +1,6 @@
 require 'spec_helper'
 require 'pry'
-
-Reform::Form.reform_2_0!
+require 'dry-types'
 
 describe MultiPartDate do
   let(:model) do
@@ -397,25 +396,38 @@ describe MultiPartDate do
   end
 end
 
-class DummyForm < Reform::Form
+require "reform/form/active_model/validations"
+Reform::Form.class_eval do
+  include Reform::Form::ActiveModel::Validations
+end
+
+module Types
+  include Dry::Types.module
+end
+
+class BaseDummyForm < Reform::Form
+  include Types
+end
+
+class DummyForm < BaseDummyForm
   include MultiPartDate
 
   multi_part_date :date_of_birth
 end
 
-class DummyFormWithAsOption < Reform::Form
+class DummyFormWithAsOption < BaseDummyForm
   include MultiPartDate
 
   multi_part_date :date_of_birth, as: :birth
 end
 
-class DummyFormWithDiscardOption < Reform::Form
+class DummyFormWithDiscardOption < BaseDummyForm
   include MultiPartDate
 
   multi_part_date :date_of_birth, discard_day: true
 end
 
-class DummyFormWithOnOption < Reform::Form
+class DummyFormWithOnOption < BaseDummyForm
   include MultiPartDate
   include Composition
 
@@ -429,7 +441,7 @@ class DummyFormWithOnOption < Reform::Form
   multi_part_date :date_of_birth, on: :nested_model
 end
 
-class DummyFormWithValidateIfOption < Reform::Form
+class DummyFormWithValidateIfOption < BaseDummyForm
   include MultiPartDate
 
   multi_part_date :date_of_birth, validate_if: :some_truthy_method

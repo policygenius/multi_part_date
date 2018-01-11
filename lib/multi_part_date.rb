@@ -3,9 +3,6 @@ require 'active_support/concern'
 require 'active_support'
 require 'date'
 require 'reform'
-require 'representable/coercion'
-
-Reform::Form.reform_2_0!
 
 module MultiPartDate
   extend ActiveSupport::Concern
@@ -15,13 +12,13 @@ module MultiPartDate
       key = options[:as] || field_name
       discard_options = options.slice(:discard_day, :discard_month, :discard_year)
       on_options = options.slice(:on)
-      type = options[:type] || Date
+      type = options[:type] || Types::Form::Date
 
       create_methods_for(field_name, key, discard_options)
 
-      property :"#{key}_month", { type: Integer, virtual: true }.merge(on_options)
-      property :"#{key}_day", { type: Integer, virtual: true }.merge(on_options)
-      property :"#{key}_year", { type: Integer, virtual: true }.merge(on_options)
+      property :"#{key}_month", { type: Types::Coercible::Int, virtual: true }.merge(on_options)
+      property :"#{key}_day", { type: Types::Coercible::Int, virtual: true }.merge(on_options)
+      property :"#{key}_year", { type: Types::Coercible::Int, virtual: true }.merge(on_options)
       property field_name, { type: type }.merge(on_options)
 
       validate_if_required(field_name, options[:validate_if])
@@ -64,7 +61,7 @@ module MultiPartDate
       define_method(:"set_#{field_name}") do
         return nil unless send(:"valid_#{field_name}_date?")
 
-        date = Date.new(
+        date = ::Date.new(
           send(:"#{key}_year_value"),
           send(:"#{key}_month_value"),
           send(:"#{key}_day_value")
@@ -98,7 +95,7 @@ module MultiPartDate
 
     def create_valid_date_method_for(field_name, key)
       define_method(:"valid_#{field_name}_date?") do
-        Date.valid_date?(
+        ::Date.valid_date?(
           send(:"#{key}_year_value"),
           send(:"#{key}_month_value"),
           send(:"#{key}_day_value")
