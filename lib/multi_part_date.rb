@@ -16,9 +16,9 @@ module MultiPartDate
 
       create_methods_for(field_name, key, discard_options)
 
-      property :"#{key}_month", { type: Types::Coercible::Int, virtual: true }.merge(on_options)
-      property :"#{key}_day", { type: Types::Coercible::Int, virtual: true }.merge(on_options)
-      property :"#{key}_year", { type: Types::Coercible::Int, virtual: true }.merge(on_options)
+      property :"#{key}_month", { type: Types::Form::Int, virtual: true }.merge(on_options)
+      property :"#{key}_day", { type: Types::Form::Int, virtual: true }.merge(on_options)
+      property :"#{key}_year", { type: Types::Form::Int, virtual: true }.merge(on_options)
       property field_name, { type: type }.merge(on_options)
 
       validate_if_required(field_name, options[:validate_if])
